@@ -6,6 +6,7 @@ import io.reactivex.rxjava3.core.Observable
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.Path
 
 
 interface ApiService {
@@ -18,6 +19,9 @@ interface ApiService {
     @Headers(Constants.CONTENT_TYPE_APPLICATION_JSON)
     fun getBusRoutes(): Observable<Response<List<ResponseModel.BusRoute.Result>>>
 
+    @GET(ApiConstants.GET_BUS_BY_BUS_ROUTE_ID)
+    @Headers(Constants.CONTENT_TYPE_APPLICATION_JSON)
+    fun getBusByBusRouteID(@Path(Constants.BUS_ROUTE_ID) busRouteId: String): Observable<Response<List<ResponseModel.BusData.Result>>>
 
 
 }

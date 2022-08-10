@@ -1,7 +1,6 @@
 package com.example.gobus.view
 
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -20,9 +19,6 @@ import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
-import java.io.File
-import java.io.IOException
-import java.text.SimpleDateFormat
 
 
 class MainActivity : AppCompatActivity() {
@@ -35,9 +31,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initUI()
-        toolbar_button.setOnClickListener {
-            onBackPressed()
-        }
+        toolbar_button.visibility = View.GONE
     }
 
 
@@ -56,7 +50,9 @@ class MainActivity : AppCompatActivity() {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 viewPagerMain.currentItem = tab.position
                 if(viewPagerMain.currentItem == 0){
-
+                    val fragmentTransaction = supportFragmentManager.beginTransaction()
+                    fragmentTransaction.replace(R.id.frameLayout, MapBusStopFragment())
+                    fragmentTransaction.commit()
                 }else if (viewPagerMain.currentItem == 1){
                     initDataBusRoutes()
                 }
@@ -81,10 +77,10 @@ class MainActivity : AppCompatActivity() {
         getBusStopsViewModel?.getBusStopsViewModelLiveData?.observe(this,{ it ->
             when{
                 it.isError.isError ->{
-
+                    HandleFailAndErrorResponse.handleError(this, it.isError.exception)
                 }
                 it.isFail.isFail ->{
-
+                    HandleFailAndErrorResponse.handleFail(this, it.isFail)
                 }
                 else ->{
                     it.data.also {

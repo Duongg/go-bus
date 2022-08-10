@@ -16,7 +16,6 @@ class GetBusRoutesViewModel: BaseViewModel() {
             apiRepository.getBusRoutes().doOnSubscribe {
                 getBusRoutesViewModelLiveData.value = CommonViewState()
             }.subscribe({ response ->
-              Log.d("TAG", response.toString())
                 when(response){
                     is ResponseModel.BusRoute.ResponseSealed.Success ->{
                         getBusRoutesViewModelLiveData.value = CommonViewState(

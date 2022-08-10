@@ -65,12 +65,14 @@ class BusRoutesFragment : Fragment(), SearchView.OnQueryTextListener {
 
             adapterBusRoute.setOnClickItemListener(object : BusRoutesAdapter.ItemBusRouteListener {
                 override fun onClickItemBusRoute(position: Int, view: View) {
-                    startActivity(
-                        Intent(
+                    if (listBusRoute != null) {
+                        val intent = Intent(
                             activity!!.applicationContext,
                             RouteDetailsActivity::class.java
                         )
-                    )
+                        intent.putExtra("BUS_ROUTE", listBusRoute!!.get(position))
+                        startActivity(intent)
+                    }
                 }
 
             })

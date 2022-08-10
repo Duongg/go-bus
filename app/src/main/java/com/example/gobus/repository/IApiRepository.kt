@@ -8,4 +8,6 @@ interface IApiRepository {
     fun getBusRoutes(): Observable<ResponseModel.BusRoute.ResponseSealed>
 
     fun getBusStops(): Observable<ResponseModel.BusStop.ResponseSealed>
+
+    fun getBusByBusRouteID(busRouteId: String): Observable<ResponseModel.BusData.ResponseSealed>
 }

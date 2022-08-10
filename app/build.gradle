@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
+
 }
 def retrofitVersion = '2.9.0'
 def rxJavaVersion = '3.0.0'
@@ -44,6 +45,7 @@ android {
 
 dependencies {
 
+    implementation 'com.android.support:multidex:1.0.3'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
@@ -72,5 +74,7 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     // google map
     implementation "com.google.android.gms:play-services:$gmsVersion"
+    implementation "com.google.android.gms:play-services-maps:$gmsVersion"
+//    implementation "com.google.android.gms:play-services-vision:$gmsVersion"
 
 }

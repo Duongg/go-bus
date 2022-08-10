@@ -53,4 +53,24 @@ class ApiRepository
 
         }
     }
+
+    override fun getBusByBusRouteID(busRouteId: String): Observable<ResponseModel.BusData.ResponseSealed> {
+        val observable = apiData.getBusByBusRouteId(busRouteId).observeAndSubcribeOn()
+
+        return observable.map { response ->
+            if(response.isSuccessful){
+                response.body()?.let{
+                    ResponseModel.BusData.ResponseSealed.Success(
+                        it
+                    )
+                }
+            }else{
+                try {
+                    ResponseModel.BusData.ResponseSealed.Fail(response)
+                }catch (e: java.lang.Exception){
+                    ResponseModel.BusData.ResponseSealed.Fail(response)
+                }
+            }
+        }
+    }
 }

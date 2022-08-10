@@ -10,4 +10,6 @@ class ApiData @Inject constructor(val apiService: ApiService) {
     fun getBusRoutes(): Observable<Response<List<ResponseModel.BusRoute.Result>>> = apiService.getBusRoutes()
 
     fun getBusStops(): Observable<Response<List<ResponseModel.BusStop.Result>>> = apiService.getBusStops()
+
+    fun getBusByBusRouteId(busRouteId: String): Observable<Response<List<ResponseModel.BusData.Result>>> = apiService.getBusByBusRouteID(busRouteId)
 }

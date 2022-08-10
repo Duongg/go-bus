@@ -41,4 +41,13 @@ class ResponseModel{
             var Lon: String?
         ) : Serializable
     }
+    class BusData{
+        sealed class ResponseSealed{
+            data class Success(val result: List<Result>?): ResponseSealed()
+            data class Fail(val responseBody: Response<List<Result>>): ResponseSealed()
+        }
+        data class Result(
+            var VehicleId: Long?,
+        ): Serializable
+    }
 }
