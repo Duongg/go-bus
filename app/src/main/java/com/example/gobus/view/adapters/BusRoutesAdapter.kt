@@ -22,7 +22,7 @@ class BusRoutesAdapter(
     private val context: Context,
     private val listBusRoutes: List<ResponseModel.BusRoute.Result>?
 ) : RecyclerView.Adapter<BusRoutesAdapter.BusRouteViewHolder>(), Filterable {
-    var listBusRoutesFiltered: ArrayList<ResponseModel.BusRoute.Result> = ArrayList()
+     var listBusRoutesFiltered: List<ResponseModel.BusRoute.Result>? = listBusRoutes
     lateinit var mItemBusRouteListener: ItemBusRouteListener
 
     fun setOnClickItemListener(itemBusRouteListener: ItemBusRouteListener) {
@@ -36,7 +36,7 @@ class BusRoutesAdapter(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: BusRouteViewHolder, position: Int) {
-        val itemBusRoute = listBusRoutes?.get(position)
+        val itemBusRoute = listBusRoutesFiltered?.get(position)
         holder.txtRouteNo.text = itemBusRoute?.RouteNo
         holder.txtRouteName.text = itemBusRoute?.RouteName
         holder.txtTripPerDay.text = itemBusRoute?.TripsPerDay.toString()
@@ -47,8 +47,8 @@ class BusRoutesAdapter(
     }
 
     override fun getItemCount(): Int {
-        if (listBusRoutes != null) {
-            return listBusRoutes.size
+        if (listBusRoutesFiltered != null) {
+            return listBusRoutesFiltered!!.size
         }
         return 0
     }
@@ -78,28 +78,27 @@ class BusRoutesAdapter(
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val charString = constraint?.toString() ?: ""
-                listBusRoutesFiltered =
-                    if (charString.isEmpty()) listBusRoutes as ArrayList<ResponseModel.BusRoute.Result> else {
-                        val filteredList = ArrayList<ResponseModel.BusRoute.Result>()
+                if(charString.isEmpty()){
+                    if (listBusRoutes != null) {
+                        listBusRoutesFiltered = listBusRoutes
+                    }
+                }else{
+                    val filteredList = ArrayList<ResponseModel.BusRoute.Result>()
                         listBusRoutes?.filter {
-                            (it.RouteName?.toLowerCase()?.contains(constraint.toString()) == true)
-
+                            (it.RouteName?.toLowerCase()?.contains(charString.toLowerCase()) == true)
                         }
                             ?.forEach { filteredList.add(it) }
-                        filteredList
-
-                    }
-                return FilterResults().apply {
-                    values = listBusRoutesFiltered
-                    Log.d("LIST", Gson().toJson(listBusRoutesFiltered))
+                    listBusRoutesFiltered = filteredList
                 }
+                val filterResult : FilterResults = FilterResults()
+                filterResult.values = listBusRoutesFiltered
+                return filterResult
             }
 
             override fun publishResults(p0: CharSequence?, results: FilterResults?) {
-                listBusRoutesFiltered = if (results?.values == null)
-                    ArrayList()
-                else
-                    results.values as ArrayList<ResponseModel.BusRoute.Result>
+                if (results != null) {
+                    listBusRoutesFiltered = results.values as List<ResponseModel.BusRoute.Result>
+                }
                 notifyDataSetChanged()
             }
 

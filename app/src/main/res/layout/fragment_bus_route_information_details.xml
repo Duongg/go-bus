@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.fragments.BusRouteInformationDetailsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:text="Tuyến xe số " />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtRouteNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"
+                tools:text="Route No" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:text="Tên Tuyến: " />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtRouteName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"
+                tools:text="Route Name" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:text="Số chuyến / Ngày: " />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtTripPerDay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"
+                tools:text="Trip per Day" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:text="Thời gian hoạt động: " />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtDepartureTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"
+                tools:text="Departure Time" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:text="Lượt đi: " />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtRouteInBound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"
+                tools:text="Departure Time" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:text="Lượt về: " />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtRouteOutBound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"
+                tools:text="Departure Time" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

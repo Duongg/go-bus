@@ -52,7 +52,6 @@ class BusRoutesFragment : Fragment(), SearchView.OnQueryTextListener {
             search_view.maxWidth = Integer.MAX_VALUE;
             search_view.setOnQueryTextListener(this)
 
-
             if (listBusRoute == null) {
                 listBusRoute = emptyList()
             }
@@ -89,7 +88,7 @@ class BusRoutesFragment : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onQueryTextChange(newText: String?): Boolean {
         adapterBusRoute.filter.filter(newText)
-        return true
+        return false
     }
 
 }
