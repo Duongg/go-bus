@@ -6,7 +6,7 @@ import javax.inject.Singleton
 
 
 @Singleton
-@Component(modules = [ContextModule::class, NetworkModule::class])
+@Component(modules = [ContextModule::class, RoomModule::class, NetworkModule::class])
 interface AppComponent {
 
     fun inject(baseViewModel: BaseViewModel)

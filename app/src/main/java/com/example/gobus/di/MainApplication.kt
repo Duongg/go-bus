@@ -19,12 +19,13 @@ class MainApplication: Application() {
         super.onCreate()
         mInstance = this@MainApplication
         initDagger()
-        writeLogFile()
+       // writeLogFile()
     }
 
     private fun initDagger(){
         appComponent = DaggerAppComponent.builder()
             .contextModule(ContextModule(this))
+            .roomModule(RoomModule())
             .networkModule(NetworkModule())
             .build()
     }

@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.gobus.R
+import com.example.gobus.data.local.entity.BoundPointEntity
+import com.example.gobus.data.local.entity.BusRouteLineEntity
 import com.example.gobus.extension.getViewModel
 import com.example.gobus.responsemodel.ResponseModel
 import com.example.gobus.utils.HandleFailAndErrorResponse
@@ -14,6 +16,7 @@ import com.example.gobus.view.fragments.BusStopFragment
 import com.example.gobus.view.fragments.MapBusStopFragment
 import com.example.gobus.viewmodel.GetBusRoutesViewModel
 import com.example.gobus.viewmodel.GetBusStopsViewModel
+import com.example.gobus.viewmodel.GetRouteLineViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.gson.Gson
@@ -25,19 +28,21 @@ class MainActivity : AppCompatActivity() {
     private var viewModel: GetBusRoutesViewModel? = null
     private var getBusStopsViewModel: GetBusStopsViewModel? = null
     private var getBusRoutesViewModel: GetBusRoutesViewModel? = null
+    private var getBusRouteLineViewModel: GetRouteLineViewModel? = null
     private var listBusStop: List<ResponseModel.BusStop.Result>? = null
     private var listBusRoutes: List<ResponseModel.BusRoute.Result>? = null
+    private var listBusRouteLine: List<ResponseModel.BusRouteLine.Result>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initUI()
-        toolbar_button.visibility = View.GONE
+        initDataBusRouteLine()
     }
 
 
     private fun initUI(){
         toolbar_title.text = "Trang chủ"
-
+        toolbar_button.visibility = View.GONE
         tbMainLayout.addTab(tbMainLayout.newTab().setText("Xung quanh"))
         tbMainLayout.addTab(tbMainLayout.newTab().setText("Tuyến xe"))
         tbMainLayout.tabGravity = TabLayout.GRAVITY_FILL
@@ -139,7 +144,32 @@ class MainActivity : AppCompatActivity() {
         })
 
     }
+    private fun initDataBusRouteLine(){
+        getBusRouteLineViewModel = getViewModel()
 
+        getBusRouteLineViewModel?.getBusRouteLine()
+
+        getBusRouteLineViewModel?.getBusRouteLineViewModelLiveData?.observe(this,{ it ->
+            when{
+                it.isError.isError ->{
+                    HandleFailAndErrorResponse.handleError(this, it.isError.exception)
+                }
+                it.isFail.isFail ->{
+                    HandleFailAndErrorResponse.handleFail(this, it.isFail)
+                }
+                else -> {
+                    it.data.also {
+                        listBusRouteLine = it
+                        if(listBusRouteLine != null){
+                            for (item in listBusRouteLine!!) {
+                                getBusRouteLineViewModel?.insertBusRouteLine(item)
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    }
 
     override fun onResume() {
         super.onResume()

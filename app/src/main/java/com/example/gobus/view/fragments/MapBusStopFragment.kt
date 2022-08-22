@@ -18,4 +18,11 @@ class MapBusStopFragment : Fragment() {
         return inflater.inflate(R.layout.frg_map_bus_stop, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+    fun setData(){
+
+    }
+
 }

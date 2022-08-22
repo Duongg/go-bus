@@ -23,5 +23,8 @@ interface ApiService {
     @Headers(Constants.CONTENT_TYPE_APPLICATION_JSON)
     fun getBusByBusRouteID(@Path(Constants.BUS_ROUTE_ID) busRouteId: String): Observable<Response<List<ResponseModel.BusData.Result>>>
 
+    @GET(ApiConstants.GET_ROUTE_LINE)
+    @Headers(Constants.CONTENT_TYPE_APPLICATION_JSON)
+    fun getBusRouteLine(): Observable<Response<List<ResponseModel.BusRouteLine.Result>>>
 
 }

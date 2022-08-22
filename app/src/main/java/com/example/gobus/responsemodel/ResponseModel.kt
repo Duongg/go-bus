@@ -50,4 +50,25 @@ class ResponseModel{
             var VehicleId: Long?,
         ): Serializable
     }
+    class BusRouteLine{
+        sealed class ResponseSealed{
+            data class Success(val result: List<Result>): ResponseSealed()
+            data class Fail(val responseBody: Response<List<Result>>): ResponseSealed()
+        }
+        data class Result(
+            var BusRouteId: Int?,
+            var Color: String?,
+            var OutBoundPoints:List<BoundPoints?>,
+            var InBoundPoints: List<BoundPoints?>
+        ): Serializable
+        data class BoundPoints(
+            var StartBusStopId: Int?,
+            var EndBusStopId: Int?,
+            var Points: List<Points>
+        ): Serializable
+        data class Points(
+            var Latitude: Double?,
+            var Longitude: Double?
+        ): Serializable
+    }
 }

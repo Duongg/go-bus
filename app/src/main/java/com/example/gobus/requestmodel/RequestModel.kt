@@ -11,4 +11,6 @@ class RequestModel {
             var Longitude: String
         )
     }
+
 }
+
